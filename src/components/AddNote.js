@@ -9,6 +9,7 @@ const AddNote = () => {
   const handleClick =(e) => {
     e.preventDefault();
     addNote(note.title, note.description)
+    setNote({title: "", description: "", tag:""})
   }
   const onChange = (e) => {
     setNote({...note, [e.target.name] : e.target.value})
@@ -29,6 +30,7 @@ const AddNote = () => {
             aria-describedby="emailHelp"
             name="title"
             onChange={onChange}
+            value={note.title}
           />
         </div>
         <div className="mb-3">
@@ -41,12 +43,10 @@ const AddNote = () => {
             id="description"
             name="description"
             onChange={onChange}
+            value={note.description}
           />
         </div>
-        <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-        </div>
-        <button type="submit" className="btn btn-primary" onClick={handleClick}>
+        <button type="submit" className="btn btn-primary" onClick={handleClick} disabled= {note.title.length<5 || note.description.length<5}>
           Submit
         </button>
       </form>
